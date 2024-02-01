@@ -1,5 +1,6 @@
 // src/components/Chat.tsx
 import React, { FC } from 'react';
+import { useRouter } from 'next/router'
 
 const Chat: FC<{ messages: string[]; onSendMessage: (message: string) => void }> = ({ messages, onSendMessage }) => {
     const handleSendMessage = (e: React.FormEvent) => {
@@ -10,11 +11,18 @@ const Chat: FC<{ messages: string[]; onSendMessage: (message: string) => void }>
             messageInput.value = '';
         }
     };
-
+    const username={
+        id:1,
+        name:'juan',
+    }
+    const router = useRouter()
     return (
         <div className="max-w-md mx-auto mt-8 p-4 bg-gray-100 rounded-md shadow-md">
             <div className="mb-4">
                 <h2 className="text-2xl font-bold">Chat en línea</h2>
+                <button onClick={() => router.push(`/users/${username.id}`)}>
+                    {username.name}
+                </button>
             </div>
             <div className="mb-4 max-h-60 overflow-y-auto">
                 {messages.map((msg, index) => (
